@@ -10,7 +10,7 @@ class QixSessionService {
    * @param docId
    * @returns {Promise<TResult>}
    */
-  static async openSession(docId, jwt) {
+  static async openSession(docId, jwt, flush) {
     // Get list of engines
     let engines;
     try {
@@ -36,7 +36,7 @@ class QixSessionService {
 
     try {
       // Prepare the session
-      const sessionId = await engineSessionPrepper.prepareDoc(ip, port, docId, jwt);
+      const sessionId = await engineSessionPrepper.prepareDoc(ip, port, docId, jwt, flush);
       const sessionInfo = {
         ip,
         port,

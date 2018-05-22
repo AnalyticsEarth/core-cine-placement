@@ -15,9 +15,16 @@ version: "3.1"
 # while (true); do curl http://session-placement/v1/doc/session-doc -f -s --header "Authorization: Bearer 123"; done
 
 services:
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile-testproxy
+    ports:
+      - "8080:8080"
+
   session-placement:
     build: .
-    entrypoint: node --inspect-brk=0.0.0.0:5858 /app/src/index.js
+    entrypoint: node --inspect=0.0.0.0:5858 /app/src/index.js
     ports:
       - "9455:9455"
       - "5858:5858"
@@ -35,14 +42,6 @@ services:
     image: qlikcore/engine:12.171.0
     command: -S AcceptEULA=${ACCEPT_EULA}
     ports:
-      - "9276:9076"
-    labels:
-      qix-engine: ""
-
-  engine2:
-    image: qlikcore/engine:12.171.0
-    command: -S AcceptEULA=${ACCEPT_EULA}
-    ports:
-      - "9176:9076"
+      - "9076:9076"
     labels:
       qix-engine: ""

@@ -1,0 +1,7 @@
+FROM nginx:alpine
+
+COPY proxy/testproxy.conf /etc/nginx/conf.d/test.conf
+COPY proxy/html/ /var/www/html/test/
+
+
+EXPOSE 8080

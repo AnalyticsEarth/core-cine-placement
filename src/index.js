@@ -47,9 +47,20 @@ router.get(`/${healthEndpoint}`, async (ctx) => {
 });
 
 router.get(`/${sessionEndpoint}/doc/:docId`, async (ctx) => {
-  const fullDocId = `/doc/${ctx.params.docId}`;
+  const fullDocId = `${ctx.params.docId}`;
   try {
-    const sessionInfo = await qixSessionService.openSession(fullDocId, ctx.headers.authorization);
+    const sessionInfo = await qixSessionService.openSession(fullDocId, ctx.headers.authorization,false);
+    ctx.body = JSON.stringify(sessionInfo, undefined, '   ');
+  } catch (err) {
+    logger.error(`Failed to open doc id ${ctx.params.docId} with error message: ${err}`);
+    ctx.status = err.status || 500;
+  }
+});
+
+router.get(`/${sessionEndpoint}/doc/:docId/flush`, async (ctx) => {
+  const fullDocId = `${ctx.params.docId}`;
+  try {
+    const sessionInfo = await qixSessionService.openSession(fullDocId, ctx.headers.authorization,true);
     ctx.body = JSON.stringify(sessionInfo, undefined, '   ');
   } catch (err) {
     logger.error(`Failed to open doc id ${ctx.params.docId} with error message: ${err}`);

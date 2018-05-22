@@ -24,7 +24,29 @@ paths:
       summary: "Get a session for a document with docId"
       description: "Finds a Qlik Associative Engine and opens the document for the user"
       operationId: "openSession"
-      produces: 
+      produces:
+        - "application/json"
+      parameters:
+        - name: "docId"
+          in: "path"
+          description: "Guid of the doc to open"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/session"
+        "404":
+          description: "Document not found"
+  /session/doc/{docId}/flush:
+   get:
+      tags:
+        - "session"
+      summary: "Get a session for a document with docId"
+      description: "Finds a Qlik Associative Engine and opens the document for the user"
+      operationId: "openSession"
+      produces:
         - "application/json"
       parameters:
         - name: "docId"
