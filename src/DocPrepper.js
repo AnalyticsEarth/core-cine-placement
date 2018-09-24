@@ -64,7 +64,7 @@ class DocPrepper {
         await qix.createSessionApp();
       }
 
-      await qix.session.close();
+      //await qix.session.close();
 
       return sessionId;
     } catch (err) {
