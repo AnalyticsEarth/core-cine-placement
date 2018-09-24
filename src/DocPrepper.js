@@ -58,13 +58,13 @@ class DocPrepper {
         }
 
         logger.info(`Doc List: ${docList}`);
-        await qix.openDoc(docId, 'testuser');
+        //await qix.openDoc(docId, 'testuser');
         logger.info(`Opened Doc: ${docId}`);
       } else {
         await qix.createSessionApp();
       }
 
-      //await qix.session.close();
+      await qix.session.close();
 
       return sessionId;
     } catch (err) {
