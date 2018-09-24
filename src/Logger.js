@@ -10,7 +10,7 @@ class Logger {
    */
   static get() {
     if (!Logger.logger) {
-      Logger.logger = new (winston.Logger)({
+      Logger.logger = new (winston.createLogger)({
         transports: [
           new (winston.transports.Console)({
             level: process.env.LOG_LEVEL || 'info',
